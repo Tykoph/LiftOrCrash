@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FaceAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: a9c9d1270e42d3f458dbe43e51a6654b, type: 3}
+    - {fileID: 2800000, guid: 392e2f42b04d346478001a57f045ec93, type: 3}
+    - {fileID: 2800000, guid: 50feb6494faf08a448fe5ab5ee416875, type: 3}
+    - {fileID: 2800000, guid: 9e6b5c9cfad2e4147a7afea679993df1, type: 3}
+    - {fileID: 2800000, guid: 8c0e287ac6ec19c4fac801406bd80552, type: 3}
+    - {fileID: 2800000, guid: 4e5dcd9d5b6bc39459f35b8cce527a3f, type: 3}
+    - {fileID: 2800000, guid: b17d04df3e22af34a84babdfeda8bd24, type: 3}
+    - {fileID: 2800000, guid: 6a277300182786a458e5437eba5bc29b, type: 3}
+    - {fileID: 2800000, guid: 777109fee2a1bb74f95b49af5379e254, type: 3}
+    - {fileID: 2800000, guid: a41ad0017ffb93140984f7e1fea7e584, type: 3}
+    - {fileID: 2800000, guid: 5b022f7fc1514bd4f87dcb3a008af0a1, type: 3}
+    - {fileID: 2800000, guid: eb404b97c7836b14eb632de531f5173f, type: 3}
+    - {fileID: 2800000, guid: 5277a405f6f4592498ebb783648a4f94, type: 3}
+    - {fileID: 2800000, guid: a69affcfc9498f042bd61609c69505e1, type: 3}
+    - {fileID: 2800000, guid: d83195af813f61f4db1e317f54af5b59, type: 3}
+    - {fileID: 2800000, guid: 8006bd6f1064854408cf08724fcf03e7, type: 3}
+    - {fileID: 2800000, guid: edf2a2070ed01344b88db65b0305c4d4, type: 3}
+    - {fileID: 2800000, guid: 82ed0f191d7fa1c42bd9b15fdeb46af9, type: 3}
+    - {fileID: 2800000, guid: 7de866fc9112c2340b8cde7345d3d8a4, type: 3}
+    - {fileID: 2800000, guid: fd2de038efea15a4b8029ea46d72619f, type: 3}
+    - {fileID: 2800000, guid: 8464b188d9ed3cf448f0265517739464, type: 3}
+    - {fileID: 2800000, guid: 083d06c2da701e0418ff64f07390dd51, type: 3}
+    - {fileID: 2800000, guid: 2e1099e0294826240b7e2c5c5fff3d23, type: 3}
+    - {fileID: 2800000, guid: 67c7389e9db74784a9c390b1b399448c, type: 3}
+    - {fileID: 2800000, guid: 2d3a2edd7e0be4e4a841ce86bf16a35e, type: 3}
+    - {fileID: 2800000, guid: 1684ba1a02f608848a7adc052ecf7810, type: 3}
+    - {fileID: 2800000, guid: 4d9c3d18687bca44ab8af08626357855, type: 3}
+    - {fileID: 2800000, guid: 71856034fde573f46b2de75a87fcfe2d, type: 3}
+    totalSpriteSurfaceArea: 1285166
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 6a277300182786a458e5437eba5bc29b, type: 3}
+  - {fileID: 21300000, guid: 2e1099e0294826240b7e2c5c5fff3d23, type: 3}
+  - {fileID: 21300000, guid: a41ad0017ffb93140984f7e1fea7e584, type: 3}
+  - {fileID: 21300000, guid: 392e2f42b04d346478001a57f045ec93, type: 3}
+  - {fileID: 21300000, guid: 083d06c2da701e0418ff64f07390dd51, type: 3}
+  - {fileID: 21300000, guid: 71856034fde573f46b2de75a87fcfe2d, type: 3}
+  - {fileID: 21300000, guid: 5277a405f6f4592498ebb783648a4f94, type: 3}
+  - {fileID: 21300000, guid: edf2a2070ed01344b88db65b0305c4d4, type: 3}
+  - {fileID: 21300000, guid: a9c9d1270e42d3f458dbe43e51a6654b, type: 3}
+  - {fileID: 21300000, guid: eb404b97c7836b14eb632de531f5173f, type: 3}
+  - {fileID: 21300000, guid: 4d9c3d18687bca44ab8af08626357855, type: 3}
+  - {fileID: 21300000, guid: fd2de038efea15a4b8029ea46d72619f, type: 3}
+  - {fileID: 21300000, guid: 8464b188d9ed3cf448f0265517739464, type: 3}
+  - {fileID: 21300000, guid: 82ed0f191d7fa1c42bd9b15fdeb46af9, type: 3}
+  - {fileID: 21300000, guid: 50feb6494faf08a448fe5ab5ee416875, type: 3}
+  - {fileID: 21300000, guid: 1684ba1a02f608848a7adc052ecf7810, type: 3}
+  - {fileID: 21300000, guid: 8c0e287ac6ec19c4fac801406bd80552, type: 3}
+  - {fileID: 21300000, guid: 9e6b5c9cfad2e4147a7afea679993df1, type: 3}
+  - {fileID: 21300000, guid: 7de866fc9112c2340b8cde7345d3d8a4, type: 3}
+  - {fileID: 21300000, guid: 4e5dcd9d5b6bc39459f35b8cce527a3f, type: 3}
+  - {fileID: 21300000, guid: 2d3a2edd7e0be4e4a841ce86bf16a35e, type: 3}
+  - {fileID: 21300000, guid: 67c7389e9db74784a9c390b1b399448c, type: 3}
+  - {fileID: 21300000, guid: 777109fee2a1bb74f95b49af5379e254, type: 3}
+  - {fileID: 21300000, guid: 8006bd6f1064854408cf08724fcf03e7, type: 3}
+  - {fileID: 21300000, guid: 5b022f7fc1514bd4f87dcb3a008af0a1, type: 3}
+  - {fileID: 21300000, guid: d83195af813f61f4db1e317f54af5b59, type: 3}
+  - {fileID: 21300000, guid: a69affcfc9498f042bd61609c69505e1, type: 3}
+  - {fileID: 21300000, guid: b17d04df3e22af34a84babdfeda8bd24, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Heart
+  - Rectangle
+  - Mouth_2
+  - BlackMask
+  - PinkShy
+  - zZz
+  - Mouth_5
+  - Mouth_9
+  - Black
+  - Mouth_4
+  - X_eye
+  - Mouth_12
+  - Mouth_13
+  - Mouth_10
+  - Brow_1
+  - White
+  - Brow_3
+  - Brow_2
+  - Mouth_11
+  - Brow_4
+  - V_eye
+  - Tear
+  - Mouth_1
+  - Mouth_8
+  - Mouth_3
+  - Mouth_7
+  - Mouth_6
+  - Drop
+  m_Tag: FaceAtlas
+  m_IsVariant: 0
