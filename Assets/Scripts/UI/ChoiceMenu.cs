@@ -98,15 +98,24 @@ public class ChoiceMenu : MonoBehaviour
 		foreach (Button button in liftChoiceButtons)
 		{
 			SOWeight weight = CalculateWeightProbability();
-			var weightText = button.GetComponentInChildren<TextMeshProUGUI>();
-			weightText.text = weight.weightValue + " kG";
+			button.GetComponentInChildren<TextMeshProUGUI>().text = weight.weightValue + " kG";
+			button.GetComponentInChildren<RawImage>().texture = weight.weightIcon;
+			var buttonImage = button.GetComponent<Image>();
+			buttonImage.color = weight.weightTier switch
+			{
+				Tier.Tier0 => Color.cornflowerBlue,
+				Tier.Tier1 => Color.green,
+				Tier.Tier2 => Color.yellow,
+				Tier.Tier3 => Color.red,
+				_ => Color.white
+			};
 			liftWeights[buttonId] = weight.weightValue;
 			buttonId++;
 		}
 
 		if (!spawnBonusButton) return;
-		SOBonus bonus = CalculateBonusProbability();
 		liftChoiceButtons[1].gameObject.SetActive(false);
+		SOBonus bonus = CalculateBonusProbability();
 		bonusButton.gameObject.SetActive(true);
 		bonusButton.GetComponentInChildren<RawImage>().texture = bonus.bonusIcon;
 		bonusValue = bonus.bonusValue;

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f282d2fdbd40a094b464de95cae727, type: 3}
   m_Name: Weight200
   m_EditorClassIdentifier: 
-  weightIcon: {fileID: 0}
+  weightIcon: {fileID: 2800000, guid: e572ed2176a588946a334c0da6787bbc, type: 3}
+  weightTier: 1
   weightValue: 200
   weightSpawnChance: 0.3
