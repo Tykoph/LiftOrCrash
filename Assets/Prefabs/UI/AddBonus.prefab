@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7196576192508228422
 RectTransform:
   m_ObjectHideFlags: 0
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8277784052752713386}
   - component: {fileID: 5208006642952828157}
-  - component: {fileID: 2576265226429817878}
+  - component: {fileID: 9049364034365014306}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -167,7 +167,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2845441082489392044}
   m_CullTransparentMesh: 1
---- !u!114 &2576265226429817878
+--- !u!114 &9049364034365014306
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
