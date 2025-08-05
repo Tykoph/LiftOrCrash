@@ -50,6 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc37e898c58d46d2859bf343c44d2ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelValue: {fileID: 6319347732556462835}
+  continueButton: {fileID: 26684802414207223}
+  cashoutButton: {fileID: 5215547876370578522}
   cashoutValueText: {fileID: 7105071011855264184}
 --- !u!1 &862547441440076250
 GameObject:

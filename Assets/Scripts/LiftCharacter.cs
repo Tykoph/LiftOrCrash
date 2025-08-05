@@ -24,7 +24,7 @@ public enum CharacterEmotion
 
 public class LiftCharacter : MonoBehaviour
 {
-	private int standardLiftWeight = 1000;
+	private int standardLiftWeight = 1500;
 	public int MaxLiftWeight => standardLiftWeight + BoostAmount;
 	public float CurrentLiftWeight { get; private set; } = 0f;
 
@@ -34,7 +34,7 @@ public class LiftCharacter : MonoBehaviour
 	public CharacterTrait Trait { get; private set; } = CharacterTrait.None;
 	public CharacterEmotion Emotion { get; private set; } = CharacterEmotion.Serene;
 
-	private float PercentageLifted => CurrentLiftWeight / MaxLiftWeight;
+	public float PercentageLifted => CurrentLiftWeight / standardLiftWeight;
 
 	public List<float> emotionThresholds = new List<float>
 	{
@@ -47,6 +47,7 @@ public class LiftCharacter : MonoBehaviour
 	public void AddLiftWeight(int weight)
 	{
 		CurrentLiftWeight += weight;
+		UIManager.UIInstance.UpdateGoalBar();
 		UpdateEmotionMeter();
 	}
 
@@ -61,7 +62,7 @@ public class LiftCharacter : MonoBehaviour
 
 	public void GenerateCharacter()
 	{
-		standardLiftWeight = Random.Range(1000, 2001);
+		standardLiftWeight = Random.Range(1500, 3001);
 		CurrentLiftWeight = 0f;
 		UpdateEmotionMeter();
 		Trait = Random.Range(1, 5) switch

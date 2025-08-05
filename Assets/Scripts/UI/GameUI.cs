@@ -13,9 +13,9 @@ public class GameUI : MonoBehaviour
 	[SerializeField]
 	public TextMeshProUGUI currentGainText;
 
-	private void SetCurrentGainText()
+	public void SetCurrentGainText()
 	{
-		currentGainText.text = GameManager.GMInstance.CurrentGain.ToString(CultureInfo.InvariantCulture);
+		currentGainText.text = GameManager.GMInstance.CurrentGain.ToString("F2");
 	}
 
 	public void StartGame()
@@ -24,6 +24,7 @@ public class GameUI : MonoBehaviour
 		cashoutMenu.SetActive(false);
 		choiceMenu.gameObject.SetActive(true);
 		goalBar.gameObject.SetActive(true);
+		goalBar.StartGame();
 		NextRound();
 	}
 

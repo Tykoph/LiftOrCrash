@@ -3,11 +3,11 @@
 public class UIManager : MonoBehaviour
 {
 	[SerializeField]
-	public MainMenu mainMenu;
+	private MainMenu mainMenu;
 	[SerializeField]
-	public GameUI gameUI;
+	private GameUI gameUI;
 	[SerializeField]
-	public GameObject characterSelectionMenu;
+	private GameObject characterSelectionMenu;
 
 	public static UIManager UIInstance { get; private set; }
 
@@ -24,6 +24,24 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
+	public void InitializeUI()
+	{
+		mainMenu.gameObject.SetActive(true);
+		gameUI.gameObject.SetActive(false);
+		characterSelectionMenu.SetActive(false);
+	}
+
+	public void SetCurrentGainText()
+	{
+		gameUI.SetCurrentGainText();
+	}
+
+	public void CashoutMenu(bool activate)
+	{
+		gameUI.cashoutMenu.SetActive(activate);
+		gameUI.SetCurrentGainText();
+	}
+
 	public void StartGame()
 	{
 		mainMenu.gameObject.SetActive(false);
@@ -35,5 +53,10 @@ public class UIManager : MonoBehaviour
 	{
 		if (GameManager.GMInstance.LiftCharacter == null) return;
 		gameUI.NextRound();
+	}
+
+	public void UpdateGoalBar()
+	{
+		gameUI.goalBar.UpdateGoalBar();
 	}
 }
