@@ -24,9 +24,9 @@ namespace UI
             this.customizationManager = customizationManager;
             foreach (CharacterCustomizationCategory category in customizationManager.categories)
             {
-                GameObject categoryPrefab = Instantiate(categoryButtonPrefab, categoryButtonContainer);
+                // GameObject categoryPrefab = Instantiate(categoryButtonPrefab, categoryButtonContainer);
 
-                categoryPrefab.GetComponent<UI_CategoryButton>().Initialize(category);
+                // categoryPrefab.GetComponent<UI_CategoryButton>().Initialize(category);
             }
         }
 

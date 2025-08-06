@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Character;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class LiftCharacter : MonoBehaviour
@@ -14,6 +15,9 @@ public class LiftCharacter : MonoBehaviour
 
 	public bool HaveBoost { get; private set; } = false;
 	private int boostValue;
+
+	[SerializeField]
+	private CharacterCustomizationManager characterCustomizationManager;
 
 	[SerializeField]
 	private SOCharacterTraitList soCharacterTraitList;
@@ -63,6 +67,7 @@ public class LiftCharacter : MonoBehaviour
 		int roundedValue = Mathf.RoundToInt(randomValue / 10f) * 10; // Round to nearest 10
 		standardLiftWeight = roundedValue;
 		CurrentLiftWeight = 0;
+		characterCustomizationManager.Initialize();
 
 		boostValue = 0;
 		HaveBoost = false;

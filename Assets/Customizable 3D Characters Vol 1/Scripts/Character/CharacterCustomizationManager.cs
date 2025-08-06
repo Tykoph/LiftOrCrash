@@ -62,6 +62,11 @@ namespace Character
 
         private void Start()
         {
+            Initialize();
+        }
+
+        public void Initialize()
+        {
             customization = new CharacterCustomization();
 
             SetDefault();
@@ -109,8 +114,13 @@ namespace Character
         {
             foreach (var category in categories)
             {
-                SelectOption(category.id, category.options[0].id);
+                int optionRandomIndex = UnityEngine.Random.Range(0, category.options.Length);
+                SelectOption(category.id, category.options[optionRandomIndex].id);
             }
+
+            SelectOption(categories[1].id, categories[1].options[0].id);
+            SelectOption(categories[2].id, categories[2].options[0].id);
+            SelectOption(categories[8].id, categories[8].options[1].id);
         }
 
         public void PlayAnimation()
