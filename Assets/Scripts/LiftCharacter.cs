@@ -3,10 +3,14 @@ using Random = UnityEngine.Random;
 
 public class LiftCharacter : MonoBehaviour
 {
+	public delegate void LiftUpdate();
+	public event LiftUpdate OnLiftUpdate;
+
 	private int standardLiftWeight = 1500;
-	private int MaxLiftWeight => standardLiftWeight + boostValue;
-	private float currentLiftWeight;
-	public float PercentageLifted => currentLiftWeight / standardLiftWeight;
+	public int MaxLiftWeight => standardLiftWeight + boostValue;
+
+	public int CurrentLiftWeight { get; private set; }
+	public float PercentageLifted => (float)CurrentLiftWeight / standardLiftWeight;
 
 	public bool HaveBoost { get; private set; } = false;
 	private int boostValue;
@@ -21,19 +25,23 @@ public class LiftCharacter : MonoBehaviour
 
 	public void AddLiftWeight(int weight)
 	{
-		currentLiftWeight += weight;
-		UIManager.UIInstance.UpdateGoalBar();
+		CurrentLiftWeight += weight;
+		OnLiftUpdate?.Invoke();
 		UpdateEmotionMeter();
+		CheckWinCondition();
+	}
 
-		if (currentLiftWeight <= MaxLiftWeight && currentLiftWeight >= standardLiftWeight)
+	private void CheckWinCondition()
+	{
+		if (CurrentLiftWeight <= MaxLiftWeight && CurrentLiftWeight >= standardLiftWeight)
 		{
-			print($"Winner with weight: {currentLiftWeight} for a max lift of: {MaxLiftWeight}");
+			print($"Winner with weight: {CurrentLiftWeight} for a max lift of: {MaxLiftWeight}");
 			GameManager.GMInstance.WinGame();
 		}
-		else if (currentLiftWeight > MaxLiftWeight)
+		else if (CurrentLiftWeight > MaxLiftWeight)
 		{
-			print($"Looser with weight: {currentLiftWeight} for a max lift of: {MaxLiftWeight}");
-			GameManager.GMInstance.LooseGame();
+			print($"Looser with weight: {CurrentLiftWeight} for a max lift of: {MaxLiftWeight}");
+			GameManager.GMInstance.LoseGame();
 		}
 	}
 
@@ -51,7 +59,7 @@ public class LiftCharacter : MonoBehaviour
 		int randomValue = Random.Range(1500, 3001);
 		int roundedValue = Mathf.RoundToInt(randomValue / 10f) * 10; // Round to nearest 10
 		standardLiftWeight = roundedValue;
-		currentLiftWeight = 0f;
+		CurrentLiftWeight = 0;
 
 		boostValue = 0;
 		HaveBoost = false;
@@ -82,7 +90,7 @@ public class LiftCharacter : MonoBehaviour
 		}
 		else if (PercentageLifted >= SOCharacterTrait.exhaustedThreshold)
 		{
-			if (MaxLiftWeight <= currentLiftWeight)
+			if (MaxLiftWeight <= CurrentLiftWeight)
 			{
 				SOCharacterEmotion = soCharacterEmotionList.defeatedEmotion;
 			}

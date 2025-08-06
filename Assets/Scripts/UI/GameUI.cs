@@ -10,8 +10,6 @@ public class GameUI : MonoBehaviour
 	[SerializeField]
 	public GoalBar goalBar;
 	[SerializeField]
-	public GameObject cashoutMenu;
-	[SerializeField]
 	public TextMeshProUGUI currentGainText;
 	[SerializeField]
 	private Button addBetButton;
@@ -19,11 +17,6 @@ public class GameUI : MonoBehaviour
 	private TextMeshProUGUI betAmountText;
 	[SerializeField]
 	private TextMeshProUGUI moneyText;
-
-	public void SetCurrentGainText()
-	{
-		currentGainText.text = GameManager.GMInstance.GetCurrentGainString();
-	}
 
 	private void Start()
 	{
@@ -38,7 +31,6 @@ public class GameUI : MonoBehaviour
 	public void StartGame()
 	{
 		SetCurrentGainText();
-		cashoutMenu.SetActive(false);
 		choiceMenu.gameObject.SetActive(true);
 		goalBar.gameObject.SetActive(true);
 		goalBar.StartGame();
@@ -59,5 +51,10 @@ public class GameUI : MonoBehaviour
 	private void UpdateMoney()
 	{
 		moneyText.text = GameManager.GMInstance.GetMoneyString();
+	}
+
+	private void SetCurrentGainText()
+	{
+		currentGainText.text = GameManager.GMInstance.GetCurrentGainString();
 	}
 }

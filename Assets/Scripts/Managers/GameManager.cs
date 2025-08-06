@@ -121,12 +121,12 @@ public class GameManager : MonoBehaviour
 		{
 			float stageGain = GetStageGain(StagePassed);
 			AddCurrentGain(stageGain);
-			print(StagePassed + " stage passed, current gain: " + currentGain);
 		}
+		print(StagePassed + " stage passed, Stage Diff: " + stageDifference);
 
 		if (stageDifference < CASHOUT_STAGE_DIFFERENCE) return;
 		stageDifference = 0;
-		UIManager.UIInstance.CashoutMenu(true);
+		UIManager.UIInstance.ShowCashoutMenu();
 	}
 
 	private void AddJackpotGain()
@@ -140,20 +140,29 @@ public class GameManager : MonoBehaviour
 	{
 		print("You cashed out with " + currentGain + " gain!");
 		AddMoney(currentGain);
-		UIManager.UIInstance.CashoutMenu(false);
+		UIManager.UIInstance.HideCashoutMenu();
 		InitializeGame();
 	}
 
-	public void LooseGame()
+	public void LoseGame()
 	{
-		liftCharacter.gameObject.SetActive(false);
-		InitializeGame();
+		UIManager.UIInstance.ShowLosePopup();
 	}
 
 	public void WinGame()
 	{
 		AddJackpotGain();
-		Cashout();
+		UIManager.UIInstance.ShowWinPopup();
 	}
 
+	public void ReturnToMainMenu(bool win = true)
+	{
+		if (!win)
+		{
+			InitializeGame();
+			return;
+		}
+
+		Cashout();
+	}
 }

@@ -14,11 +14,14 @@ public class GoalBar : MonoBehaviour
 	{
 		stageScroll.StartGame();
 		goalBar.value = 0f;
+		GameManager.GMInstance.liftCharacter.OnLiftUpdate += UpdateGoalBar;
 	}
 
-	public void UpdateGoalBar()
+	private void UpdateGoalBar()
 	{
 		float newValue = GameManager.GMInstance.liftCharacter.PercentageLifted;
+
+		print("GoalBar Update: " + newValue);
 
 		stageScroll.ScrollStages(newValue);
 

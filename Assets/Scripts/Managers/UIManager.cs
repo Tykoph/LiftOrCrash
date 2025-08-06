@@ -8,6 +8,12 @@ public class UIManager : MonoBehaviour
 	private GameUI gameUI;
 	[SerializeField]
 	private GameObject characterSelectionMenu;
+	[SerializeField]
+	private GameObject cashoutMenu;
+	[SerializeField]
+	private GameObject winPopup;
+	[SerializeField]
+	private GameObject losePopup;
 
 	public static UIManager UIInstance { get; private set; }
 
@@ -32,12 +38,10 @@ public class UIManager : MonoBehaviour
 	{
 		mainMenu.gameObject.SetActive(true);
 		gameUI.gameObject.SetActive(false);
+		cashoutMenu.SetActive(false);
+		winPopup.SetActive(false);
+		losePopup.SetActive(false);
 		// characterSelectionMenu.SetActive(false);
-	}
-
-	public void CashoutMenu(bool activate)
-	{
-		gameUI.cashoutMenu.SetActive(activate);
 	}
 
 	public void StartGame()
@@ -53,8 +57,23 @@ public class UIManager : MonoBehaviour
 		gameUI.NextRound();
 	}
 
-	public void UpdateGoalBar()
+	public void ShowCashoutMenu()
 	{
-		gameUI.goalBar.UpdateGoalBar();
+		cashoutMenu.SetActive(true);
+	}
+
+	public void HideCashoutMenu()
+	{
+		cashoutMenu.SetActive(false);
+	}
+
+	public void ShowWinPopup()
+	{
+		winPopup.SetActive(true);
+	}
+
+	public void ShowLosePopup()
+	{
+		losePopup.SetActive(true);
 	}
 }

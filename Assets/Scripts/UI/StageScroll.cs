@@ -23,10 +23,11 @@ public class StageScroll : MonoBehaviour
 	private Texture completedTexture;
 
 	private float currentYPos;
-	private int currentStageIndex = 0;
+	private int currentStageIndex;
 
 	public void StartGame()
 	{
+		currentStageIndex = 0;
 		content.localPosition = new Vector3(0, yPosOne, 0);
 		foreach (RawImage stageImage in stageImages)
 		{
@@ -54,15 +55,15 @@ public class StageScroll : MonoBehaviour
 			_ => newValue
 		};
 
-		currentStageIndex = Mathf.RoundToInt(newValue * stageImages.Length);
+		currentStageIndex = Mathf.FloorToInt(newValue * stageImages.Length);
 		GameManager.GMInstance.AddStagePassed(currentStageIndex);
+
 		for (var i = 0; i < currentStageIndex; i++)
 		{
 			stageImages[i].texture = completedTexture;
 		}
 
 		currentYPos = Mathf.Lerp(yPosOne, yPosTwo, newValue);
-
 		content.DOLocalMoveY(currentYPos, 1.5f);
 	}
 }
