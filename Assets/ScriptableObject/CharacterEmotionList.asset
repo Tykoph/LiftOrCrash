@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98c4d90fea9430e9b17ff9265810b85, type: 3}
+  m_Name: CharacterEmotionList
+  m_EditorClassIdentifier: 
+  sereneEmotion: {fileID: 11400000, guid: 4506142fbf93ad447ba3034ec49831e0, type: 2}
+  sweatyEmotion: {fileID: 11400000, guid: 13a5cc923e95e984c92123a8862ce369, type: 2}
+  shakyEmotion: {fileID: 11400000, guid: 8d118af501a2c104391aebe77a794c48, type: 2}
+  exhaustedEmotion: {fileID: 11400000, guid: 6240b71c59f2b644a9b7b91dc1a23748, type: 2}
+  defeatedEmotion: {fileID: 11400000, guid: bcc377b16a122054fa33576361190b75, type: 2}
+  winnerEmotion: {fileID: 11400000, guid: 1cfe5ffb71ebc6644a35c0cab2f9231c, type: 2}

@@ -1,54 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
-
-public enum CharacterTrait
-{
-	None,
-	Neutral,
-	Confident,
-	Enthusiastic,
-	Anxious
-}
-
-public enum CharacterEmotion
-{
-	None,
-	Serene,
-	Sweaty,
-	Shaky,
-	Exhausted,
-	Defeated
-}
 
 public class LiftCharacter : MonoBehaviour
 {
 	private int standardLiftWeight = 1500;
 	public int MaxLiftWeight => standardLiftWeight + BoostAmount;
 	public float CurrentLiftWeight { get; private set; } = 0f;
+	public float PercentageLifted => CurrentLiftWeight / standardLiftWeight;
 
 	public bool HaveBoost { get; private set; } = false;
 	public int BoostAmount { get; private set; } = 0;
 
-	public CharacterTrait Trait { get; private set; } = CharacterTrait.None;
-	public CharacterEmotion Emotion { get; private set; } = CharacterEmotion.Serene;
+	[SerializeField]
+	private SOCharacterTraitList soCharacterTraitList;
+	public SOCharacterTrait SOCharacterTrait { get; private set; }
 
-	public float PercentageLifted => CurrentLiftWeight / standardLiftWeight;
-
-	public List<float> emotionThresholds = new List<float>
-	{
-		0.3f, // Serene
-		0.5f, // Sweaty
-		0.8f, // Shaky
-		1.0f  // Exhausted
-	};
+	[SerializeField]
+	private SOCharacterEmotionList soCharacterEmotionList;
+	public SOCharacterEmotion SOCharacterEmotion { get; private set; }
 
 	public void AddLiftWeight(int weight)
 	{
 		CurrentLiftWeight += weight;
 		UIManager.UIInstance.UpdateGoalBar();
 		UpdateEmotionMeter();
+
+		if (CurrentLiftWeight <= MaxLiftWeight && CurrentLiftWeight <= standardLiftWeight)
+		{
+			GameManager.GMInstance.WinGame();
+		}
+		else if (CurrentLiftWeight > MaxLiftWeight)
+		{
+			GameManager.GMInstance.LooseGame();
+		}
 	}
 
 	public void AddBoost(int boostAmount)
@@ -62,58 +46,46 @@ public class LiftCharacter : MonoBehaviour
 
 	public void GenerateCharacter()
 	{
-		standardLiftWeight = Random.Range(1500, 3001);
+		int randomValue = Random.Range(1500, 3001);
+		int roundedValue = Mathf.RoundToInt(randomValue / 10f) * 10; // Round to nearest 10
+		standardLiftWeight = roundedValue;
+		print($"Generated Lift Weight: {standardLiftWeight}, for a random value of {randomValue}");
 		CurrentLiftWeight = 0f;
-		UpdateEmotionMeter();
-		Trait = Random.Range(1, 5) switch
-		{
-			1 => CharacterTrait.Neutral,
-			2 => CharacterTrait.Confident,
-			3 => CharacterTrait.Enthusiastic,
-			4 => CharacterTrait.Anxious,
-			_ => CharacterTrait.None
-		};
-		UpdateEmotionThresholds();
-	}
 
-	private void UpdateEmotionThresholds()
-	{
-		emotionThresholds = Trait switch
-		{
-			CharacterTrait.Neutral => new List<float> { 0.3f, 0.5f, 0.8f, 1.0f },
-			CharacterTrait.Confident => new List<float> { 0.5f, 0.4f, 0.7f, 1.0f },
-			CharacterTrait.Enthusiastic => new List<float> { 0.1f, 0.7f, 0.85f, 1.0f },
-			CharacterTrait.Anxious => new List<float> { 0.2f, 0.4f, 0.6f, 1.0f },
-			_ => emotionThresholds
-		};
+		int randomTrait = Random.Range(0, soCharacterTraitList.characterTraitList.Length);
+		SOCharacterTrait = soCharacterTraitList.characterTraitList[randomTrait];
+
+		UpdateEmotionMeter();
 	}
 
 	private void UpdateEmotionMeter()
 	{
-		if (PercentageLifted < emotionThresholds[0])
+		if (PercentageLifted < SOCharacterTrait.sereneThreshold)
 		{
-			Emotion = CharacterEmotion.Serene;
+			SOCharacterEmotion = soCharacterEmotionList.sereneEmotion;
 		}
-		else if (PercentageLifted < emotionThresholds[1])
+		else if (PercentageLifted < SOCharacterTrait.sweatyThreshold)
 		{
-			Emotion = CharacterEmotion.Sweaty;
+			SOCharacterEmotion = soCharacterEmotionList.sweatyEmotion;
 		}
-		else if (PercentageLifted < emotionThresholds[2])
+		else if (PercentageLifted < SOCharacterTrait.shakyThreshold)
 		{
-			Emotion = CharacterEmotion.Shaky;
+			SOCharacterEmotion = soCharacterEmotionList.shakyEmotion;
 		}
-		else if (PercentageLifted < emotionThresholds[3])
+		else if (PercentageLifted < SOCharacterTrait.exhaustedThreshold)
 		{
-			Emotion = CharacterEmotion.Exhausted;
+			SOCharacterEmotion = soCharacterEmotionList.exhaustedEmotion;
 		}
-		else if (PercentageLifted >= emotionThresholds[3])
+		else if (PercentageLifted >= SOCharacterTrait.exhaustedThreshold)
 		{
-			Emotion = CharacterEmotion.Defeated;
-			GameManager.GMInstance.LooseGame();
-		}
-		else
-		{
-			Emotion = CharacterEmotion.None;
+			if (MaxLiftWeight <= CurrentLiftWeight)
+			{
+				SOCharacterEmotion = soCharacterEmotionList.defeatedEmotion;
+			}
+			else
+			{
+				SOCharacterEmotion = soCharacterEmotionList.winnerEmotion;
+			}
 		}
 	}
 }

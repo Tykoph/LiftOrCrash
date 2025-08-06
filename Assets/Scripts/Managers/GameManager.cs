@@ -70,12 +70,13 @@ public class GameManager : MonoBehaviour
 		StagePassed = 0;
 	}
 
-	public void AddStagePassed(int newStage)
+	public void AddStagePassed(int stageReached)
 	{
-		stageDifference += newStage - StagePassed;
-		for (; StagePassed < newStage; StagePassed++)
+		stageDifference += stageReached - StagePassed;
+		for (; StagePassed < stageReached; StagePassed++)
 		{
-			CurrentGain += BetAmount * (StagePassed * 0.1f);
+			float stageGain = BetAmount * (StagePassed * 0.1f);
+			AddCurrentGain(stageGain);
 			UIManager.UIInstance.SetCurrentGainText();
 			print(StagePassed + " stage passed, current gain: " + CurrentGain);
 		}
@@ -100,6 +101,12 @@ public class GameManager : MonoBehaviour
 		Destroy(LiftCharacter.gameObject);
 		LiftCharacter = null;
 		InitializeGame();
+	}
+
+	public void WinGame()
+	{
+		Cashout();
+		print("You won the game!");
 	}
 
 }

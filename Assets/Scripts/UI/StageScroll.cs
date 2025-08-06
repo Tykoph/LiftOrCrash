@@ -41,16 +41,13 @@ public class StageScroll : MonoBehaviour
 			_ => newValue
 		};
 
-		int stagePassed = Mathf.FloorToInt(newValue * stageImages.Length);
-		GameManager.GMInstance.AddStagePassed(stagePassed);
-		for (var i = 0; i < stagePassed; i++)
+		int stageReached = Mathf.FloorToInt(newValue * stageImages.Length);
+		GameManager.GMInstance.AddStagePassed(stageReached);
+		for (var i = 0; i < stageReached; i++)
 		{
 			stageImages[i].texture = completedTexture;
 		}
 
-		// if (newValue < 0.5f) return;
-
-		// newValue = (newValue - 0.5f) * 2f;
 		currentYPos = Mathf.Lerp(yPosOne, yPosTwo, newValue);
 
 		content.DOLocalMoveY(currentYPos, 1.5f);
