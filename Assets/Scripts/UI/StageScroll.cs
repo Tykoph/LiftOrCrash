@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,7 @@ public class StageScroll : MonoBehaviour
 	private Texture completedTexture;
 
 	private float currentYPos;
+	private int currentStageIndex = 0;
 
 	public void StartGame()
 	{
@@ -29,6 +31,17 @@ public class StageScroll : MonoBehaviour
 		foreach (RawImage stageImage in stageImages)
 		{
 			stageImage.texture = notCompletedTexture;
+		}
+
+		GameManager.GMInstance.OnBetUpdate += UpdateGainValue;
+		UpdateGainValue();
+	}
+
+	private void UpdateGainValue()
+	{
+		for (int i = currentStageIndex; i < stageImages.Length; i++)
+		{
+			stageImages[i].GetComponentInChildren<TextMeshProUGUI>().text = GameManager.GMInstance.GetStageGain(i).ToString("F1") + "$";
 		}
 	}
 
@@ -41,9 +54,9 @@ public class StageScroll : MonoBehaviour
 			_ => newValue
 		};
 
-		int stageReached = Mathf.FloorToInt(newValue * stageImages.Length);
-		GameManager.GMInstance.AddStagePassed(stageReached);
-		for (var i = 0; i < stageReached; i++)
+		currentStageIndex = Mathf.RoundToInt(newValue * stageImages.Length);
+		GameManager.GMInstance.AddStagePassed(currentStageIndex);
+		for (var i = 0; i < currentStageIndex; i++)
 		{
 			stageImages[i].texture = completedTexture;
 		}

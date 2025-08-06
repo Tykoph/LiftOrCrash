@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
 	public delegate void GainUpdate();
 	public event GainUpdate OnGainUpdate;
 
+	public delegate void BetUpdate();
+	public event BetUpdate OnBetUpdate;
+
 	private float money = 10f;
 	private float currentGain = 0f;
 	public float BetAmount { get; private set; } = 1f;
@@ -62,6 +65,7 @@ public class GameManager : MonoBehaviour
 		}
 		AddMoney(-amount);
 		BetAmount += amount;
+		OnBetUpdate?.Invoke();
 	}
 
 	public void StartGame()
@@ -104,12 +108,18 @@ public class GameManager : MonoBehaviour
 		return BetAmount.ToString("F0") + "$";
 	}
 
+	public float GetStageGain(int stage)
+	{
+		stage++;
+		return BetAmount * (stage * 0.1f);
+	}
+
 	public void AddStagePassed(int stageReached)
 	{
 		stageDifference += stageReached - StagePassed;
 		for (; StagePassed < stageReached; StagePassed++)
 		{
-			float stageGain = BetAmount * (StagePassed * 0.1f);
+			float stageGain = GetStageGain(StagePassed);
 			AddCurrentGain(stageGain);
 			print(StagePassed + " stage passed, current gain: " + currentGain);
 		}
@@ -117,6 +127,13 @@ public class GameManager : MonoBehaviour
 		if (stageDifference < CASHOUT_STAGE_DIFFERENCE) return;
 		stageDifference = 0;
 		UIManager.UIInstance.CashoutMenu(true);
+	}
+
+	private void AddJackpotGain()
+	{
+		float jackpotGain = currentGain * 2f;
+		AddCurrentGain(jackpotGain);
+		print("Jackpot gained: " + jackpotGain);
 	}
 
 	public void Cashout()
@@ -129,15 +146,14 @@ public class GameManager : MonoBehaviour
 
 	public void LooseGame()
 	{
-		print("You loosed the game!");
 		liftCharacter.gameObject.SetActive(false);
 		InitializeGame();
 	}
 
 	public void WinGame()
 	{
+		AddJackpotGain();
 		Cashout();
-		print("You won the game!");
 	}
 
 }

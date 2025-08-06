@@ -32,6 +32,7 @@ public class LiftCharacter : MonoBehaviour
 		}
 		else if (currentLiftWeight > MaxLiftWeight)
 		{
+			print($"Looser with weight: {currentLiftWeight} for a max lift of: {MaxLiftWeight}");
 			GameManager.GMInstance.LooseGame();
 		}
 	}
@@ -40,7 +41,7 @@ public class LiftCharacter : MonoBehaviour
 	{
 		if (HaveBoost) return;
 
-		this.boostValue += boostAmount;
+		boostValue += boostAmount;
 		HaveBoost = true;
 		UpdateEmotionMeter();
 	}

@@ -92,7 +92,7 @@ public class ChoiceMenu : MonoBehaviour
 		{
 			float randomSpawn = Random.value;
 			spawnBonusButton = randomSpawn < bonusButtonSpawnChance;
-			print("Random Spawn: " + randomSpawn + ", Bonus Button Spawn: " + spawnBonusButton);
+			// print("Random Spawn: " + randomSpawn + ", Bonus Button Spawn: " + spawnBonusButton);
 		}
 
 		foreach (Button button in liftChoiceButtons)

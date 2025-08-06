@@ -30,6 +30,9 @@ public class GameUI : MonoBehaviour
 		addBetButton.onClick.AddListener(AddBetAmount);
 		GameManager.GMInstance.OnMoneyUpdate += UpdateMoney;
 		GameManager.GMInstance.OnGainUpdate += SetCurrentGainText;
+		UpdateMoney();
+		SetCurrentGainText();
+		betAmountText.text = GameManager.GMInstance.GetBetAmountString();
 	}
 
 	public void StartGame()
