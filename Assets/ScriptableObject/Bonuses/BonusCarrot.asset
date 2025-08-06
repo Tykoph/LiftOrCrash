@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonusName: Carrot
   bonusIcon: {fileID: 2800000, guid: ec6512f8da62aaa49a0145e225ce31ee, type: 3}
-  bonusValue: 400
+  bonusValue: 75
   bonusSpawnChance: 0.35

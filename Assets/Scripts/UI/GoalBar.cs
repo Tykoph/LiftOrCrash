@@ -18,7 +18,7 @@ public class GoalBar : MonoBehaviour
 
 	public void UpdateGoalBar()
 	{
-		float newValue = GameManager.GMInstance.LiftCharacter.PercentageLifted;
+		float newValue = GameManager.GMInstance.liftCharacter.PercentageLifted;
 
 		stageScroll.ScrollStages(newValue);
 

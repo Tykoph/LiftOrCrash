@@ -22,24 +22,22 @@ public class UIManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
+
+		mainMenu.gameObject.SetActive(false);
+		gameUI.gameObject.SetActive(false);
+		// characterSelectionMenu.SetActive(false);
 	}
 
 	public void InitializeUI()
 	{
 		mainMenu.gameObject.SetActive(true);
 		gameUI.gameObject.SetActive(false);
-		characterSelectionMenu.SetActive(false);
-	}
-
-	public void SetCurrentGainText()
-	{
-		gameUI.SetCurrentGainText();
+		// characterSelectionMenu.SetActive(false);
 	}
 
 	public void CashoutMenu(bool activate)
 	{
 		gameUI.cashoutMenu.SetActive(activate);
-		gameUI.SetCurrentGainText();
 	}
 
 	public void StartGame()
@@ -51,7 +49,7 @@ public class UIManager : MonoBehaviour
 
 	public void NextRound()
 	{
-		if (GameManager.GMInstance.LiftCharacter == null) return;
+		if (GameManager.GMInstance.liftCharacter == null) return;
 		gameUI.NextRound();
 	}
 

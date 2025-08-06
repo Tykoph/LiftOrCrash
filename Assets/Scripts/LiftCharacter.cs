@@ -4,12 +4,12 @@ using Random = UnityEngine.Random;
 public class LiftCharacter : MonoBehaviour
 {
 	private int standardLiftWeight = 1500;
-	public int MaxLiftWeight => standardLiftWeight + BoostAmount;
-	public float CurrentLiftWeight { get; private set; } = 0f;
-	public float PercentageLifted => CurrentLiftWeight / standardLiftWeight;
+	private int MaxLiftWeight => standardLiftWeight + boostValue;
+	private float currentLiftWeight;
+	public float PercentageLifted => currentLiftWeight / standardLiftWeight;
 
 	public bool HaveBoost { get; private set; } = false;
-	public int BoostAmount { get; private set; } = 0;
+	private int boostValue;
 
 	[SerializeField]
 	private SOCharacterTraitList soCharacterTraitList;
@@ -21,15 +21,16 @@ public class LiftCharacter : MonoBehaviour
 
 	public void AddLiftWeight(int weight)
 	{
-		CurrentLiftWeight += weight;
+		currentLiftWeight += weight;
 		UIManager.UIInstance.UpdateGoalBar();
 		UpdateEmotionMeter();
 
-		if (CurrentLiftWeight <= MaxLiftWeight && CurrentLiftWeight <= standardLiftWeight)
+		if (currentLiftWeight <= MaxLiftWeight && currentLiftWeight >= standardLiftWeight)
 		{
+			print($"Winner with weight: {currentLiftWeight} for a max lift of: {MaxLiftWeight}");
 			GameManager.GMInstance.WinGame();
 		}
-		else if (CurrentLiftWeight > MaxLiftWeight)
+		else if (currentLiftWeight > MaxLiftWeight)
 		{
 			GameManager.GMInstance.LooseGame();
 		}
@@ -39,7 +40,7 @@ public class LiftCharacter : MonoBehaviour
 	{
 		if (HaveBoost) return;
 
-		BoostAmount += boostAmount;
+		this.boostValue += boostAmount;
 		HaveBoost = true;
 		UpdateEmotionMeter();
 	}
@@ -49,8 +50,10 @@ public class LiftCharacter : MonoBehaviour
 		int randomValue = Random.Range(1500, 3001);
 		int roundedValue = Mathf.RoundToInt(randomValue / 10f) * 10; // Round to nearest 10
 		standardLiftWeight = roundedValue;
-		print($"Generated Lift Weight: {standardLiftWeight}, for a random value of {randomValue}");
-		CurrentLiftWeight = 0f;
+		currentLiftWeight = 0f;
+
+		boostValue = 0;
+		HaveBoost = false;
 
 		int randomTrait = Random.Range(0, soCharacterTraitList.characterTraitList.Length);
 		SOCharacterTrait = soCharacterTraitList.characterTraitList[randomTrait];
@@ -78,7 +81,7 @@ public class LiftCharacter : MonoBehaviour
 		}
 		else if (PercentageLifted >= SOCharacterTrait.exhaustedThreshold)
 		{
-			if (MaxLiftWeight <= CurrentLiftWeight)
+			if (MaxLiftWeight <= currentLiftWeight)
 			{
 				SOCharacterEmotion = soCharacterEmotionList.defeatedEmotion;
 			}

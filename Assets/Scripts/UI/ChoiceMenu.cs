@@ -88,7 +88,7 @@ public class ChoiceMenu : MonoBehaviour
 	{
 		int buttonId = 0;
 		bool spawnBonusButton = false;
-		if (!GameManager.GMInstance.LiftCharacter.HaveBoost)
+		if (!GameManager.GMInstance.liftCharacter.HaveBoost)
 		{
 			float randomSpawn = Random.value;
 			spawnBonusButton = randomSpawn < bonusButtonSpawnChance;
@@ -133,28 +133,28 @@ public class ChoiceMenu : MonoBehaviour
 
 	private void OnLeftButtonClicked()
 	{
-		GameManager.GMInstance.LiftCharacter.AddLiftWeight(liftWeights[0]);
+		GameManager.GMInstance.liftCharacter.AddLiftWeight(liftWeights[0]);
 		print("Added Left weight: " + liftWeights[0]);
 		UIManager.UIInstance.NextRound();
 	}
 	
 	private void OnMiddleButtonClicked()
 	{
-		GameManager.GMInstance.LiftCharacter.AddLiftWeight(liftWeights[1]);
+		GameManager.GMInstance.liftCharacter.AddLiftWeight(liftWeights[1]);
 		print("Added Middle weight: " + liftWeights[1]);
 		UIManager.UIInstance.NextRound();
 	}
 	
 	private void OnRightButtonClicked()
 	{
-		GameManager.GMInstance.LiftCharacter.AddLiftWeight(liftWeights[2]);
+		GameManager.GMInstance.liftCharacter.AddLiftWeight(liftWeights[2]);
 		print("Added Right weight: " + liftWeights[2]);
 		UIManager.UIInstance.NextRound();
 	}
 
 	private void OnBonusButtonClicked()
 	{
-		GameManager.GMInstance.LiftCharacter.AddBoost(bonusValue);
+		GameManager.GMInstance.liftCharacter.AddBoost(bonusValue);
 		print("Used bonus: " + bonusValue);
 		UIManager.UIInstance.NextRound();
 	}

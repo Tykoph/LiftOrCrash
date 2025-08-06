@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonusName: Burger
   bonusIcon: {fileID: 2800000, guid: 046ae9ae704bd9f4e9dafc78711ddc57, type: 3}
-  bonusValue: 600
+  bonusValue: 100
   bonusSpawnChance: 0.2

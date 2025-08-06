@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonusName: Banana
   bonusIcon: {fileID: 2800000, guid: f32339166d0332a459c3d84a60cc7ac1, type: 3}
-  bonusValue: 200
+  bonusValue: 50
   bonusSpawnChance: 0.45

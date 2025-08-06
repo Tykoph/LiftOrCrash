@@ -1,14 +1,20 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public float Money { get; private set; } = 0f;
-	public float CurrentGain { get; private set; } = 0f;
+	public delegate void MoneyUpdate();
+	public event MoneyUpdate OnMoneyUpdate;
+
+	public delegate void GainUpdate();
+	public event GainUpdate OnGainUpdate;
+
+	private float money = 10f;
+	private float currentGain = 0f;
 	public float BetAmount { get; private set; } = 1f;
 
 	[SerializeField]
-	private GameObject characterPrefab;
-	public LiftCharacter LiftCharacter { get; private set; }
+	public LiftCharacter liftCharacter;
 
 	public static GameManager GMInstance { get; private set; }
 
@@ -37,37 +43,65 @@ public class GameManager : MonoBehaviour
 
 	public void AddMoney(float amount)
 	{
-		Money += amount;
+		money += amount;
+		OnMoneyUpdate?.Invoke();
 	}
 
 	public void AddCurrentGain(float amount)
 	{
-		CurrentGain += amount;
+		currentGain += amount;
+		OnGainUpdate?.Invoke();
 	}
 
 	public void AddBetAmount(float amount)
 	{
+		if (amount > money)
+		{
+			Debug.LogWarning("Not enough money to add bet amount!");
+			return;
+		}
+		AddMoney(-amount);
 		BetAmount += amount;
 	}
 
 	public void StartGame()
 	{
-		CurrentGain = 0f;
+		currentGain = 0f;
 		GenerateCharacter();
 		UIManager.UIInstance.StartGame();
+		OnMoneyUpdate?.Invoke();
+		OnGainUpdate?.Invoke();
 	}
 
 	private void GenerateCharacter()
 	{
-		GameObject newCharacter = Instantiate(characterPrefab, Vector3.zero, Quaternion.identity);
-		LiftCharacter = newCharacter.GetComponent<LiftCharacter>();
-		LiftCharacter.GenerateCharacter();
+		liftCharacter.gameObject.SetActive(true);
+		liftCharacter.GenerateCharacter();
 	}
 
 	private void InitializeGame()
 	{
+		liftCharacter.gameObject.SetActive(false);
 		UIManager.UIInstance.InitializeUI();
 		StagePassed = 0;
+		currentGain = 0f;
+		BetAmount = 1f;
+		stageDifference = 0;
+	}
+
+	public string GetMoneyString()
+	{
+		return money.ToString("F2") + "$";
+	}
+
+	public string GetCurrentGainString()
+	{
+		return currentGain.ToString("F2") + "$";
+	}
+
+	public string GetBetAmountString()
+	{
+		return BetAmount.ToString("F0") + "$";
 	}
 
 	public void AddStagePassed(int stageReached)
@@ -77,8 +111,7 @@ public class GameManager : MonoBehaviour
 		{
 			float stageGain = BetAmount * (StagePassed * 0.1f);
 			AddCurrentGain(stageGain);
-			UIManager.UIInstance.SetCurrentGainText();
-			print(StagePassed + " stage passed, current gain: " + CurrentGain);
+			print(StagePassed + " stage passed, current gain: " + currentGain);
 		}
 
 		if (stageDifference < CASHOUT_STAGE_DIFFERENCE) return;
@@ -88,9 +121,8 @@ public class GameManager : MonoBehaviour
 
 	public void Cashout()
 	{
-		print("You cashed out with " + CurrentGain + " gain!");
-		AddMoney(CurrentGain);
-		CurrentGain = 0f;
+		print("You cashed out with " + currentGain + " gain!");
+		AddMoney(currentGain);
 		UIManager.UIInstance.CashoutMenu(false);
 		InitializeGame();
 	}
@@ -98,8 +130,7 @@ public class GameManager : MonoBehaviour
 	public void LooseGame()
 	{
 		print("You loosed the game!");
-		Destroy(LiftCharacter.gameObject);
-		LiftCharacter = null;
+		liftCharacter.gameObject.SetActive(false);
 		InitializeGame();
 	}
 

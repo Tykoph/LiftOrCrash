@@ -25,7 +25,7 @@ public class CashoutMenu : MonoBehaviour
 	private void OnEnable()
 	{
 		levelValue.text = GameManager.GMInstance.StagePassed.ToString();
-		cashoutValueText.text = GameManager.GMInstance.CurrentGain.ToString("F2");
+		cashoutValueText.text = GameManager.GMInstance.GetCurrentGainString();
 	}
 
 	private void OnContinueButtonClicked()
