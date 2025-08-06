@@ -23,6 +23,9 @@ public class LiftCharacter : MonoBehaviour
 	private SOCharacterEmotionList soCharacterEmotionList;
 	public SOCharacterEmotion SOCharacterEmotion { get; private set; }
 
+	[SerializeField]
+	private EmotionChanger emotionChanger;
+
 	public void AddLiftWeight(int weight)
 	{
 		CurrentLiftWeight += weight;
@@ -99,5 +102,7 @@ public class LiftCharacter : MonoBehaviour
 				SOCharacterEmotion = soCharacterEmotionList.winnerEmotion;
 			}
 		}
+
+		emotionChanger.ChangeEmotion(SOCharacterEmotion.characterEmotion);
 	}
 }
