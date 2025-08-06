@@ -61,6 +61,11 @@ public class LiftCharacter : MonoBehaviour
 		UpdateEmotionMeter();
 	}
 
+	public void ResetEmotion()
+	{
+		emotionChanger.ChangeEmotion(CharacterEmotion.None);
+	}
+
 	public void GenerateCharacter()
 	{
 		int randomValue = Random.Range(1500, 3001);

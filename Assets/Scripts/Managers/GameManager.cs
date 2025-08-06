@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
 
 	private void InitializeGame()
 	{
+		liftCharacter.ResetEmotion();
 		liftCharacter.gameObject.SetActive(false);
 		UIManager.UIInstance.InitializeUI();
 		StagePassed = 0;
