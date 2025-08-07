@@ -38,6 +38,7 @@ public class GameUI : MonoBehaviour
 		goalBar.gameObject.SetActive(true);
 		goalBar.StartGame();
 		NextRound();
+		betAmountText.text = GameManager.GMInstance.GetBetAmountString();
 	}
 
 	public void NextRound()

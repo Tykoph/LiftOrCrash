@@ -51,6 +51,7 @@ namespace UI
                 {
                     GameManager.GMInstance.SpendMoney(option.price);
                     option.Unlock();
+                    lockIcon.gameObject.SetActive(false);
                     SetBuyable(false);
                 }
                 else
