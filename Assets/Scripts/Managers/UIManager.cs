@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 	[SerializeField]
 	private GameUI gameUI;
 	[SerializeField]
-	private GameObject characterSelectionMenu;
+	private GameObject wardrobeMenu;
 	[SerializeField]
 	private GameObject cashoutMenu;
 	[SerializeField]
@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
 
 		mainMenu.gameObject.SetActive(false);
 		gameUI.gameObject.SetActive(false);
-		// characterSelectionMenu.SetActive(false);
+		wardrobeMenu.SetActive(false);
 	}
 
 	public void InitializeUI()
@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
 		cashoutMenu.SetActive(false);
 		winPopup.SetActive(false);
 		losePopup.SetActive(false);
-		// characterSelectionMenu.SetActive(false);
+		wardrobeMenu.SetActive(false);
 	}
 
 	public void StartGame()
@@ -49,6 +49,12 @@ public class UIManager : MonoBehaviour
 		mainMenu.gameObject.SetActive(false);
 		gameUI.gameObject.SetActive(true);
 		gameUI.StartGame();
+		OpenWardrobeMenu(); // The first time opening the wardrobe menu requires to SetActive 2 time for some reason // This prevents the player from needing to click the button twice
+	}
+
+	public void OpenWardrobeMenu()
+	{
+		wardrobeMenu.SetActive(true);
 	}
 
 	public void NextRound()

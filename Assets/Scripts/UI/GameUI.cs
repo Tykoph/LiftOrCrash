@@ -17,10 +17,13 @@ public class GameUI : MonoBehaviour
 	private TextMeshProUGUI betAmountText;
 	[SerializeField]
 	private TextMeshProUGUI moneyText;
+	[SerializeField]
+	private Button wardrobeButton;
 
 	private void Start()
 	{
 		addBetButton.onClick.AddListener(AddBetAmount);
+		wardrobeButton.onClick.AddListener(() => UIManager.UIInstance.OpenWardrobeMenu());
 		GameManager.GMInstance.OnMoneyUpdate += UpdateMoney;
 		GameManager.GMInstance.OnGainUpdate += SetCurrentGainText;
 		UpdateMoney();

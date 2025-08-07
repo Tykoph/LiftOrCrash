@@ -1,5 +1,6 @@
 using Character;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -15,6 +16,18 @@ namespace UI
         public GameObject optionButtonPrefab;
 
         public Transform optionButtonContainer;
+        public Button closeButton;
+        public GameObject optionsPanel;
+
+        private void Start()
+        {
+            closeButton.onClick.AddListener(HideOptionsPanel);
+        }
+
+        private void HideOptionsPanel()
+        {
+            optionsPanel.SetActive(false);
+        }
 
         public void Initialize(CharacterCustomizationCategory category)
         {
