@@ -79,6 +79,10 @@ public class GameManager : MonoBehaviour
 
 	public void StartGame()
 	{
+		if (Money > 0f)
+		{
+			Money -= 1f;
+		}
 		currentGain = 0f;
 		GenerateCharacter();
 		UIManager.UIInstance.StartGame();
