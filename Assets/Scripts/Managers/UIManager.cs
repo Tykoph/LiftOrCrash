@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
 		mainMenu.gameObject.SetActive(false);
 		gameUI.gameObject.SetActive(false);
 		wardrobeMenu.SetActive(false);
+		OpenWardrobeMenu(); // The first time opening the wardrobe menu requires to SetActive 2 time for some reason // This prevents the player from needing to click the button twice
 	}
 
 	public void InitializeUI()
@@ -49,7 +50,6 @@ public class UIManager : MonoBehaviour
 		mainMenu.gameObject.SetActive(false);
 		gameUI.gameObject.SetActive(true);
 		gameUI.StartGame();
-		OpenWardrobeMenu(); // The first time opening the wardrobe menu requires to SetActive 2 time for some reason // This prevents the player from needing to click the button twice
 	}
 
 	public void OpenWardrobeMenu()

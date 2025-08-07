@@ -1,4 +1,5 @@
 using Character;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,15 +12,54 @@ namespace UI
         public Image icon;
         public Button selectButton;
 
-        public void Initialize(CharacterCustomizationOption option)
+        [SerializeField]
+        private TextMeshProUGUI priceText;
+        [SerializeField]
+        private Image lockIcon;
+
+        public void Initialize(CharacterCustomizationOption newOption)
         {
-            this.option = option;
-            icon.sprite = option.icon;
+            this.option = newOption;
+            icon.sprite = newOption.icon;
+            SetBuyable(newOption.buyable, newOption.price);
+            lockIcon.gameObject.SetActive(newOption.locked);
             selectButton.onClick.AddListener(SelectOption);
         }
 
-        public void SelectOption()
+        private void SetBuyable(bool isBuyable, float newPrice = 100f)
         {
+            option.buyable = isBuyable;
+            option.price = newPrice;
+            if (option.buyable)
+            {
+                priceText.text = option.price + "$";
+            }
+            else
+            {
+                priceText.text = "";
+            }
+        }
+
+        private void SelectOption()
+        {
+            if (option.locked)
+            {
+                if (!option.buyable) return;
+
+                float money = GameManager.GMInstance.Money;
+                if (money >= option.price)
+                {
+                    GameManager.GMInstance.SpendMoney(option.price);
+                    option.Unlock();
+                    SetBuyable(false);
+                }
+                else
+                {
+                    Debug.Log("Not enough money to buy this option.");
+                }
+                return;
+            }
+
             UI_CusomizationManager.Instance.SelectOption(option.id);
         }
     }

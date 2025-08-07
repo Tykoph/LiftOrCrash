@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Character;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -12,8 +14,9 @@ public class GameManager : MonoBehaviour
 	public delegate void BetUpdate();
 	public event BetUpdate OnBetUpdate;
 
-	private float money = 10f;
+	public float Money { get; private set; } = 10f;
 	private float currentGain = 0f;
+	public Sprite UnlockedItemIcon { get; private set; }
 	public float BetAmount { get; private set; } = 1f;
 
 	[SerializeField]
@@ -46,7 +49,13 @@ public class GameManager : MonoBehaviour
 
 	public void AddMoney(float amount)
 	{
-		money += amount;
+		Money += amount;
+		OnMoneyUpdate?.Invoke();
+	}
+
+	public void SpendMoney(float amount)
+	{
+		Money -= amount;
 		OnMoneyUpdate?.Invoke();
 	}
 
@@ -58,7 +67,7 @@ public class GameManager : MonoBehaviour
 
 	public void AddBetAmount(float amount)
 	{
-		if (amount > money)
+		if (amount > Money)
 		{
 			Debug.LogWarning("Not enough money to add bet amount!");
 			return;
@@ -96,7 +105,7 @@ public class GameManager : MonoBehaviour
 
 	public string GetMoneyString()
 	{
-		return money.ToString("F2") + "$";
+		return Money.ToString("F2") + "$";
 	}
 
 	public string GetCurrentGainString()
@@ -134,7 +143,30 @@ public class GameManager : MonoBehaviour
 	{
 		float jackpotGain = currentGain * 2f;
 		AddCurrentGain(jackpotGain);
+		UnlockRandomItem();
 		print("Jackpot gained: " + jackpotGain);
+	}
+
+	private void UnlockRandomItem()
+	{
+		var categories = liftCharacter.characterCustomizationManager.categories;
+		List<CharacterCustomizationOption> lockedOptions = new List<CharacterCustomizationOption>();
+
+		foreach (CharacterCustomizationCategory category in categories)
+		{
+			foreach (CharacterCustomizationOption option in category.options)
+			{
+				if (option.locked && !option.buyable)
+				{
+					lockedOptions.Add(option);
+				}
+			}
+		}
+
+		int randomIndex = UnityEngine.Random.Range(0, lockedOptions.Count);
+		CharacterCustomizationOption selectedOption = lockedOptions[randomIndex];
+		selectedOption.Unlock();
+		UnlockedItemIcon = selectedOption.icon;
 	}
 
 	public void Cashout()

@@ -11,6 +11,8 @@ public class WinPopup : MonoBehaviour
 	private TextMeshProUGUI weightText;
 	[SerializeField]
 	private Button continueButton;
+	[SerializeField]
+	private Image unlockedItemImage;
 
 	private void Start()
 	{
@@ -21,6 +23,7 @@ public class WinPopup : MonoBehaviour
 	{
 		gainText.text = GameManager.GMInstance.GetCurrentGainString();
 		weightText.text = GameManager.GMInstance.liftCharacter.CurrentLiftWeight + " kg";
+		unlockedItemImage.sprite = GameManager.GMInstance.UnlockedItemIcon;
 	}
 
 	private void OnContinueButtonClicked()

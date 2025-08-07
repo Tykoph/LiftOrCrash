@@ -17,7 +17,7 @@ public class LiftCharacter : MonoBehaviour
 	private int boostValue;
 
 	[SerializeField]
-	private CharacterCustomizationManager characterCustomizationManager;
+	public CharacterCustomizationManager characterCustomizationManager;
 
 	[SerializeField]
 	private SOCharacterTraitList soCharacterTraitList;

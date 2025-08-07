@@ -184,5 +184,12 @@ namespace Character
     {
         public Sprite icon;
         public GameObject model;
+        public bool locked = true;
+        public bool buyable = false;
+        public float price = 100f;
+        public void Unlock()
+        {
+           locked = false;
+        }
     }
 }
